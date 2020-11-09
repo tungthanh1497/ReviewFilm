@@ -1,6 +1,7 @@
-package com.tungtt.reviewfilm.models.response.searchkeywords;
+package com.tungtt.reviewfilm.network.models.response.searchkeywords.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.tungtt.reviewfilm.network.models.response.searchkeywords.KeywordModel;
 
 import java.util.List;
 

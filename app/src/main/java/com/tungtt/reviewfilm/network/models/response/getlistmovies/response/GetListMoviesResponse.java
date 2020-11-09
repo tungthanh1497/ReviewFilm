@@ -1,6 +1,7 @@
-package com.tungtt.reviewfilm.models.response.getlistmovies;
+package com.tungtt.reviewfilm.network.models.response.getlistmovies.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.tungtt.reviewfilm.network.models.response.getlistmovies.MovieModel;
 
 import java.util.List;
 
@@ -32,5 +33,15 @@ public class GetListMoviesResponse {
 
     public String getTotalResults() {
         return totalResults == null ? "" : totalResults;
+    }
+
+    @Override
+    public String toString() {
+        return "GetListMoviesResponse{" +
+                "page='" + page + '\'' +
+                ", totalPages='" + totalPages + '\'' +
+                ", results=" + results +
+                ", totalResults='" + totalResults + '\'' +
+                '}';
     }
 }

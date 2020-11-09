@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.models.response.getvideos;
+package com.tungtt.reviewfilm.network.models.response.getvideos;
 
 import com.google.gson.annotations.SerializedName;
 
