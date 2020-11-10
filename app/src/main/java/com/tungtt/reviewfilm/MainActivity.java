@@ -2,13 +2,12 @@ package com.tungtt.reviewfilm;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.tungtt.reviewfilm.commons.BaseActivity;
 import com.tungtt.reviewfilm.screens.main.MainFragment;
 import com.tungtt.reviewfilm.utils.ActivityUtil;
 import com.tungtt.reviewfilm.utils.Constant;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static MainActivity instance;
 

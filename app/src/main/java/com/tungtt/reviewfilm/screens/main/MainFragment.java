@@ -1,6 +1,8 @@
 package com.tungtt.reviewfilm.screens.main;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -8,6 +10,10 @@ import androidx.annotation.NonNull;
 import com.tungtt.basemvp.BaseFragment;
 import com.tungtt.reviewfilm.network.CommonCallback;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
+import com.tungtt.reviewfilm.utils.ActivityUtil;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by tungtt a.k.a TungTT
@@ -35,23 +41,64 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
 
     @Override
     public void init(View view) {
-        onTvClicked();
+        callGetAllTabData();
     }
 
     @Override
-    public void onTvClicked() {
-        mModel().getUpcoming(new CommonCallback<GetListMoviesResponse>(getActivity()) {
+    public void callGetAllTabData() {
+        mModel().getAllTabData(getAllTaDataCallback(),
+                getUpcomingCallback(),
+                getUpcomingCallback(),
+                getUpcomingCallback(),
+                getUpcomingCallback()
+        );
+    }
+
+    private CommonCallback<GetListMoviesResponse> getUpcomingCallback() {
+        return new CommonCallback<GetListMoviesResponse>(getActivity()) {
             @Override
             public void onCommonSuccess(GetListMoviesResponse response) {
                 super.onCommonSuccess(response);
-                mView().getUpcomingSuccess(response);
+                Log.d(TAG, "onCommonSuccess: " + response);
             }
 
             @Override
             public void onCommonError(GetListMoviesResponse response) {
                 super.onCommonError(response);
-                mView().getUpcomingError();
+                Log.e(TAG, "onCommonError: " + response);
             }
-        });
+        };
+    }
+
+    private Observer<Object> getAllTaDataCallback() {
+        return new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                ActivityUtil.showProgressDialog(getActivity());
+                Log.d(TAG, "onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Object o) {
+                Log.d(TAG, "onNext: ");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: ");
+            }
+
+            @Override
+            public void onComplete() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        ActivityUtil.dismissProgressDialog(getActivity());
+                        Log.d(TAG, "onComplete: ");
+                    }
+                }, 5000);
+            }
+        };
     }
 }

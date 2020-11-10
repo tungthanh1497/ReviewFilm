@@ -7,9 +7,12 @@ import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMovies
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
 import com.tungtt.reviewfilm.network.models.searchkeywords.response.SearchKeyWordsResponse;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.HttpUrl;
@@ -101,6 +104,23 @@ public class NetworkController {
     public static Observable<Response<SearchKeyWordsResponse>> searchKeywords(String query,
                                                                               CommonCallback<SearchKeyWordsResponse> callback) {
         return initObservable(getAPIBuilder().searchKeywords(query), callback);
+    }
+
+    public static void getAllTabData(Observer<Object> observer,
+                                     CommonCallback<GetListMoviesResponse> upcomingCallback,
+                                     CommonCallback<GetListMoviesResponse> topRatedCallback,
+                                     CommonCallback<GetListMoviesResponse> popularCallback,
+                                     CommonCallback<GetListMoviesResponse> nowPlayingCallback) {
+        List<Observable<?>> observableList = new ArrayList<>();
+
+        observableList.add(getUpcoming(upcomingCallback));
+        observableList.add(getTopRated(topRatedCallback));
+        observableList.add(getPopular(popularCallback));
+        observableList.add(getNowPlaying(nowPlayingCallback));
+
+        Observable.mergeDelayError(observableList)
+                .observeOn(AndroidSchedulers.mainThread(), true)
+                .subscribe(observer);
     }
 
     private static <T extends SimpleResponse> Observable<Response<T>> initObservable(Observable<Response<T>> observable, CommonCallback<T> callback) {
