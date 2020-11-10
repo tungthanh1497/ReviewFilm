@@ -1,11 +1,12 @@
 package com.tungtt.reviewfilm.network.models.getvideos.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.tungtt.reviewfilm.network.models.SimpleResponse;
 import com.tungtt.reviewfilm.network.models.getvideos.VideoModel;
 
 import java.util.List;
 
-public class GetVideosResponse {
+public class GetVideosResponse extends SimpleResponse {
 
     @SerializedName("id")
     private String id;

@@ -1,11 +1,12 @@
 package com.tungtt.reviewfilm.network.models.getlistmovies.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.tungtt.reviewfilm.network.models.SimpleResponse;
 import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 
 import java.util.List;
 
-public class GetListMoviesResponse {
+public class GetListMoviesResponse extends SimpleResponse {
 
     @SerializedName("page")
     private String page;
