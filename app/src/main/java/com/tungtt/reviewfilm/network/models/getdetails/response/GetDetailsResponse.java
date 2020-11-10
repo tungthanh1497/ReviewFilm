@@ -1,10 +1,10 @@
-package com.tungtt.reviewfilm.network.models.response.getdetails.response;
+package com.tungtt.reviewfilm.network.models.getdetails.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.tungtt.reviewfilm.network.models.response.getdetails.CompanyModel;
-import com.tungtt.reviewfilm.network.models.response.getdetails.CountryModel;
-import com.tungtt.reviewfilm.network.models.response.getdetails.GenreModel;
-import com.tungtt.reviewfilm.network.models.response.getdetails.LanguageModel;
+import com.tungtt.reviewfilm.network.models.getdetails.CompanyModel;
+import com.tungtt.reviewfilm.network.models.getdetails.CountryModel;
+import com.tungtt.reviewfilm.network.models.getdetails.GenreModel;
+import com.tungtt.reviewfilm.network.models.getdetails.LanguageModel;
 
 import java.util.List;
 

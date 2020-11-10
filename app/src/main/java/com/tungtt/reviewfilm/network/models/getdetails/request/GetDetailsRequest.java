@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.network.models.response.getdetails.request;
+package com.tungtt.reviewfilm.network.models.getdetails.request;
 
 /**
  * Created by tungtt a.k.a TungTT

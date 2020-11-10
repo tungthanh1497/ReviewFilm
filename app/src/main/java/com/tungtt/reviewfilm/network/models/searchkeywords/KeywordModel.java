@@ -1,8 +1,8 @@
-package com.tungtt.reviewfilm.network.models.response.getdetails;
+package com.tungtt.reviewfilm.network.models.searchkeywords;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GenreModel {
+public class KeywordModel {
 
     @SerializedName("name")
     private String name;

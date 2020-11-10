@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.network.models.response.searchkeywords.request;
+package com.tungtt.reviewfilm.network.models.searchkeywords.request;
 
 /**
  * Created by tungtt a.k.a TungTT

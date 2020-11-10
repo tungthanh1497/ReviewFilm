@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.network.models.response.getlistmovies;
+package com.tungtt.reviewfilm.network.models.getlistmovies;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -102,5 +102,25 @@ public class MovieModel {
 
     public String getVoteCount() {
         return voteCount == null ? "" : voteCount;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieModel{" +
+                "overview='" + overview + '\'' +
+                ", originalLanguage='" + originalLanguage + '\'' +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", video=" + video +
+                ", title='" + title + '\'' +
+                ", genreIds=" + genreIds +
+                ", posterPath='" + posterPath + '\'' +
+                ", backdropPath='" + backdropPath + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", popularity='" + popularity + '\'' +
+                ", voteAverage='" + voteAverage + '\'' +
+                ", id='" + id + '\'' +
+                ", adult=" + adult +
+                ", voteCount='" + voteCount + '\'' +
+                '}';
     }
 }

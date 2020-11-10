@@ -1,11 +1,11 @@
-package com.tungtt.reviewfilm.network.models.response.searchkeywords.response;
+package com.tungtt.reviewfilm.network.models.getlistmovies.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.tungtt.reviewfilm.network.models.response.searchkeywords.KeywordModel;
+import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 
 import java.util.List;
 
-public class SearchKeyWordsResponse {
+public class GetListMoviesResponse {
 
     @SerializedName("page")
     private String page;
@@ -14,7 +14,7 @@ public class SearchKeyWordsResponse {
     private String totalPages;
 
     @SerializedName("results")
-    private List<KeywordModel> results;
+    private List<MovieModel> results;
 
     @SerializedName("total_results")
     private String totalResults;
@@ -27,11 +27,21 @@ public class SearchKeyWordsResponse {
         return totalPages == null ? "" : totalPages;
     }
 
-    public List<KeywordModel> getResults() {
+    public List<MovieModel> getResults() {
         return results;
     }
 
     public String getTotalResults() {
         return totalResults == null ? "" : totalResults;
+    }
+
+    @Override
+    public String toString() {
+        return "GetListMoviesResponse{" +
+                "page='" + page + '\'' +
+                ", totalPages='" + totalPages + '\'' +
+                ", results=" + results +
+                ", totalResults='" + totalResults + '\'' +
+                '}';
     }
 }

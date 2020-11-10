@@ -1,7 +1,7 @@
-package com.tungtt.reviewfilm.network.models.response.getvideos.response;
+package com.tungtt.reviewfilm.network.models.getvideos.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.tungtt.reviewfilm.network.models.response.getvideos.VideoModel;
+import com.tungtt.reviewfilm.network.models.getvideos.VideoModel;
 
 import java.util.List;
 
