@@ -1,8 +1,9 @@
 package com.tungtt.reviewfilm.screens.main;
 
 import com.tungtt.basemvp.mvp.model.BaseModelLayer;
-
-import java.util.Random;
+import com.tungtt.reviewfilm.network.CommonCallback;
+import com.tungtt.reviewfilm.network.NetworkController;
+import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 
 /**
  * Created by tungtt a.k.a TungTT
@@ -16,8 +17,12 @@ public class MainModel extends BaseModelLayer<IMainContract.Presenter>
     }
 
     @Override
-    public boolean isEven() {
-        int random = new Random().nextInt(10);
-        return random % 2 == 0;
+    public void init() {
+
+    }
+
+    @Override
+    public void getUpcoming(CommonCallback<GetListMoviesResponse> callback) {
+        NetworkController.getUpcoming(callback).subscribe();
     }
 }

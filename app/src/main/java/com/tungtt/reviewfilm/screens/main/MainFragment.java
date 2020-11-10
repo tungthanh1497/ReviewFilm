@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.tungtt.basemvp.BaseFragment;
+import com.tungtt.reviewfilm.network.CommonCallback;
+import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 
 /**
  * Created by tungtt a.k.a TungTT
@@ -13,6 +15,8 @@ import com.tungtt.basemvp.BaseFragment;
  */
 public class MainFragment extends BaseFragment<IMainContract.View, IMainContract.Model>
         implements IMainContract.Presenter {
+
+    private static final String TAG = MainFragment.class.toString();
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -31,10 +35,23 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
 
     @Override
     public void init(View view) {
-        if (mModel().isEven()) {
-            mView().updateText("Even");
-        } else {
-            mView().updateText("Odd");
-        }
+        onTvClicked();
+    }
+
+    @Override
+    public void onTvClicked() {
+        mModel().getUpcoming(new CommonCallback<GetListMoviesResponse>(getActivity()) {
+            @Override
+            public void onCommonSuccess(GetListMoviesResponse response) {
+                super.onCommonSuccess(response);
+                mView().getUpcomingSuccess(response);
+            }
+
+            @Override
+            public void onCommonError(GetListMoviesResponse response) {
+                super.onCommonError(response);
+                mView().getUpcomingError();
+            }
+        });
     }
 }
