@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.screens.popular;
+package com.tungtt.reviewfilm.screens.tabcontent;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +7,12 @@ import androidx.annotation.NonNull;
 
 import com.tungtt.basemvp.BaseFragment;
 
-public class PopularFragment extends BaseFragment<IPopularContract.View, IPopularContract.Model>
-        implements IPopularContract.Presenter {
+public class TabContentFragment extends BaseFragment<ITabContentContract.View, ITabContentContract.Model>
+        implements ITabContentContract.Presenter {
     @Override
     public void initViewModel() {
-        initModelLayer(PopularModel.newInstance());
-        initViewLayer(PopularView.newInstance());
+        initModelLayer(TabContentModel.newInstance());
+        initViewLayer(TabContentView.newInstance());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.screens.upcoming;
+package com.tungtt.reviewfilm.screens.tabcontent;
 
 import android.view.View;
 
@@ -9,16 +9,16 @@ import com.tungtt.reviewfilm.R;
  * Created by tungtt a.k.a TungTT
  * On Tue, 10 Nov 2020 - 11:47
  */
-public class UpcomingView extends BaseViewLayer<IUpcomingContract.Presenter>
-        implements IUpcomingContract.View {
+public class TabContentView extends BaseViewLayer<ITabContentContract.Presenter>
+        implements ITabContentContract.View {
 
-    public static UpcomingView newInstance() {
-        return new UpcomingView();
+    public static TabContentView newInstance() {
+        return new TabContentView();
     }
 
     @Override
     public int getLayoutRes() {
-        return R.layout.fragment_upcoming;
+        return R.layout.fragment_tab_content;
     }
 
     @Override
