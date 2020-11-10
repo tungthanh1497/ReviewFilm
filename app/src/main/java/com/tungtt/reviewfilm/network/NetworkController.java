@@ -1,6 +1,7 @@
 package com.tungtt.reviewfilm.network;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.tungtt.reviewfilm.network.models.SimpleResponse;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
@@ -8,12 +9,16 @@ import com.tungtt.reviewfilm.network.models.searchkeywords.response.SearchKeyWor
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -49,6 +54,7 @@ public class NetworkController {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://api.themoviedb.org/3/")
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(builder.build())
                     .build();
             mApiBuilder = retrofit.create(IApiService.class);
@@ -56,44 +62,51 @@ public class NetworkController {
         return mApiBuilder;
     }
 
-    public static void getUpcoming(Callback<GetListMoviesResponse> callback) {
-        getAPIBuilder().getUpcoming().enqueue(callback);
+    public static Observable<Response<GetListMoviesResponse>> getUpcoming(CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().getUpcoming(), callback);
     }
 
-    public static void getTopRated(Callback<GetListMoviesResponse> callback) {
-        getAPIBuilder().getTopRated().enqueue(callback);
+    public static Observable<Response<GetListMoviesResponse>> getTopRated(CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().getTopRated(), callback);
     }
 
-    public static void getPopular(Callback<GetListMoviesResponse> callback) {
-        getAPIBuilder().getPopular().enqueue(callback);
+    public static Observable<Response<GetListMoviesResponse>> getPopular(CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().getPopular(), callback);
     }
 
-    public static void getNowPlaying(Callback<GetListMoviesResponse> callback) {
-        getAPIBuilder().getNowPlaying().enqueue(callback);
+    public static Observable<Response<GetListMoviesResponse>> getNowPlaying(CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().getNowPlaying(), callback);
     }
 
-    public static void getDetails(String movieId,
-                                  Callback<GetDetailsResponse> callback) {
-        getAPIBuilder().getDetails(movieId).enqueue(callback);
+    public static Observable<Response<GetDetailsResponse>> getDetails(String movieId,
+                                                                      CommonCallback<GetDetailsResponse> callback) {
+        return initObservable(getAPIBuilder().getDetails(movieId), callback);
     }
 
-    public static void getVideos(String movieId,
-                                 Callback<GetVideosResponse> callback) {
-        getAPIBuilder().getVideos(movieId).enqueue(callback);
+    public static Observable<Response<GetVideosResponse>> getVideos(String movieId,
+                                                                    CommonCallback<GetVideosResponse> callback) {
+        return initObservable(getAPIBuilder().getVideos(movieId), callback);
     }
 
-    public static void getSimilarMovies(String movieId,
-                                        Callback<GetListMoviesResponse> callback) {
-        getAPIBuilder().getSimilarMovies(movieId).enqueue(callback);
+    public static Observable<Response<GetListMoviesResponse>> getSimilarMovies(String movieId,
+                                                                               CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().getSimilarMovies(movieId), callback);
     }
 
-    public static void getRecommendationsMovies(String movieId,
-                                                Callback<GetListMoviesResponse> callback) {
-        getAPIBuilder().getRecommendationsMovies(movieId).enqueue(callback);
+    public static Observable<Response<GetListMoviesResponse>> getRecommendationsMovies(String movieId,
+                                                                                       CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().getRecommendationsMovies(movieId), callback);
     }
 
-    public static void searchKeywords(String query,
-                                      Callback<SearchKeyWordsResponse> callback) {
-        getAPIBuilder().searchKeywords(query).enqueue(callback);
+    public static Observable<Response<SearchKeyWordsResponse>> searchKeywords(String query,
+                                                                              CommonCallback<SearchKeyWordsResponse> callback) {
+        return initObservable(getAPIBuilder().searchKeywords(query), callback);
+    }
+
+    private static <T extends SimpleResponse> Observable<Response<T>> initObservable(Observable<Response<T>> observable, CommonCallback<T> callback) {
+        return observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .doOnNext(callback::onResponse)
+                .doOnError(callback::onError);
     }
 }

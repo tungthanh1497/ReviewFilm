@@ -5,7 +5,8 @@ import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMovies
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
 import com.tungtt.reviewfilm.network.models.searchkeywords.response.SearchKeyWordsResponse;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -16,29 +17,29 @@ import retrofit2.http.Query;
  */
 public interface IApiService {
     @GET("movie/upcoming")
-    Call<GetListMoviesResponse> getUpcoming();
+    Observable<Response<GetListMoviesResponse>> getUpcoming();
 
     @GET("movie/top_rated")
-    Call<GetListMoviesResponse> getTopRated();
+    Observable<Response<GetListMoviesResponse>> getTopRated();
 
     @GET("movie/popular")
-    Call<GetListMoviesResponse> getPopular();
+    Observable<Response<GetListMoviesResponse>> getPopular();
 
     @GET("movie/now_playing")
-    Call<GetListMoviesResponse> getNowPlaying();
+    Observable<Response<GetListMoviesResponse>> getNowPlaying();
 
     @GET("movie/{movie_id}")
-    Call<GetDetailsResponse> getDetails(@Path("movie_id") String movieId);
+    Observable<Response<GetDetailsResponse>> getDetails(@Path("movie_id") String movieId);
 
     @GET("movie/{movie_id}/videos")
-    Call<GetVideosResponse> getVideos(@Path("movie_id") String movieId);
+    Observable<Response<GetVideosResponse>> getVideos(@Path("movie_id") String movieId);
 
     @GET("movie/{movie_id}/similar")
-    Call<GetListMoviesResponse> getSimilarMovies(@Path("movie_id") String movieId);
+    Observable<Response<GetListMoviesResponse>> getSimilarMovies(@Path("movie_id") String movieId);
 
     @GET("movie/{movie_id}/recommendations")
-    Call<GetListMoviesResponse> getRecommendationsMovies(@Path("movie_id") String movieId);
+    Observable<Response<GetListMoviesResponse>> getRecommendationsMovies(@Path("movie_id") String movieId);
 
     @GET("search/keyword")
-    Call<SearchKeyWordsResponse> searchKeywords(@Query("query") String query);
+    Observable<Response<SearchKeyWordsResponse>> searchKeywords(@Query("query") String query);
 }
