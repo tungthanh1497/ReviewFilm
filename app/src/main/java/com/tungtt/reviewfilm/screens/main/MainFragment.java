@@ -3,14 +3,20 @@ package com.tungtt.reviewfilm.screens.main;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.tungtt.basemvp.BaseFragment;
+import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.network.CommonCallback;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
+import com.tungtt.reviewfilm.screens.main.adapters.TabMenuAdapter;
 import com.tungtt.reviewfilm.utils.ActivityUtil;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -23,6 +29,19 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
         implements IMainContract.Presenter {
 
     private static final String TAG = MainFragment.class.toString();
+
+    private int[] navIcons = {
+            R.drawable.ic_home,
+            R.drawable.ic_search
+    };
+    private int[] navIconsActive = {
+            R.drawable.ic_home_selected,
+            R.drawable.ic_search_selected
+    };
+    private int[] navLabels = {
+            R.string.name_tab_home,
+            R.string.name_tab_search
+    };
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -52,6 +71,11 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
                 getUpcomingCallback(),
                 getUpcomingCallback()
         );
+    }
+
+    @Override
+    public TabMenuAdapter initTabMenuAdapter(List<Pair<String, Fragment>> listFragments) {
+        return new TabMenuAdapter(getChildFragmentManager(), listFragments);
     }
 
     private CommonCallback<GetListMoviesResponse> getUpcomingCallback() {
@@ -100,5 +124,20 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
                 }, 5000);
             }
         };
+    }
+
+    @Override
+    public String getName(int position) {
+        return getResources().getString(navLabels[position]);
+    }
+
+    @Override
+    public int getNameColor(boolean isTabSelected) {
+        return getResources().getColor(isTabSelected ? R.color.colorAccent : R.color.colorDark);
+    }
+
+    @Override
+    public int getIcon(int position, boolean isTabSelected) {
+        return isTabSelected ? navIconsActive[position] : navIcons[position];
     }
 }

@@ -36,7 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //base mvp
-    implementation 'com.github.tungthanh1497:base-mvp:0.1.3'
+    implementation 'com.github.tungthanh1497:base-mvp:0.1.4'
 
     //retrofit
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
@@ -51,5 +51,8 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    //tablayout
+    implementation 'com.google.android.material:material:1.2.1'
 
 }
