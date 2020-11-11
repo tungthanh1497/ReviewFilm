@@ -1,4 +1,4 @@
-package com.tungtt.reviewfilm.screens.tabcontent;
+package com.tungtt.reviewfilm.screens.home;
 
 import android.view.View;
 
@@ -9,16 +9,16 @@ import com.tungtt.reviewfilm.R;
  * Created by tungtt a.k.a TungTT
  * On Tue, 10 Nov 2020 - 11:47
  */
-public class TabContentView extends BaseViewLayer<ITabContentContract.Presenter>
-        implements ITabContentContract.View {
+public class HomeView extends BaseViewLayer<IHomeContract.Presenter>
+        implements IHomeContract.View {
 
-    public static TabContentView newInstance() {
-        return new TabContentView();
+    public static HomeView newInstance() {
+        return new HomeView();
     }
 
     @Override
     public int getLayoutRes() {
-        return R.layout.fragment_tab_content;
+        return R.layout.fragment_home;
     }
 
     @Override
