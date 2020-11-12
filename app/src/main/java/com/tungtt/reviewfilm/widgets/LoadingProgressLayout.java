@@ -44,7 +44,6 @@ public class LoadingProgressLayout extends LinearLayout {
         animationOut.setAnimationListener(listener);
         inflate(context, R.layout.layout_loading_progress, this);
         loaderCircle = findViewById(R.id.loader_circle);
-        loaderCircle.setRotationX(180);
         runAnimation();
     }
 
@@ -55,7 +54,6 @@ public class LoadingProgressLayout extends LinearLayout {
         animationOut.setAnimationListener(listener);
         inflate(context, R.layout.layout_loading_progress, this);
         loaderCircle = findViewById(R.id.loader_circle);
-        loaderCircle.setRotationX(180);
         runAnimation();
     }
 
@@ -66,7 +64,6 @@ public class LoadingProgressLayout extends LinearLayout {
         animationOut.setAnimationListener(listener);
         inflate(context, R.layout.layout_loading_progress, this);
         loaderCircle = findViewById(R.id.loader_circle);
-        loaderCircle.setRotationX(180);
         runAnimation();
     }
 

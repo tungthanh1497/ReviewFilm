@@ -32,4 +32,9 @@ public class LoadingDialog extends Dialog {
     protected LoadingDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
