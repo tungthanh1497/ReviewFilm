@@ -1,6 +1,5 @@
 package com.tungtt.reviewfilm.screens.main;
 
-import android.graphics.Typeface;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,10 +104,10 @@ public class MainView extends BaseViewLayer<IMainContract.Presenter>
             if (tabLayout.getTabAt(tabPosition) != null) {
                 if (tabLayout.getTabAt(tabPosition).getCustomView() != null) {
                     LinearLayout customTabLayout = (LinearLayout) tabLayout.getTabAt(tabPosition).getCustomView();
-                    updateCustomTabLayout(customTabLayout, tabPosition, selectedPosition);
+                    updateCustomTabLayout(customTabLayout, tabPosition, tabPosition == selectedPosition);
                 } else {
                     LinearLayout customTabLayout = (LinearLayout) LayoutInflater.from(mActivity()).inflate(R.layout.item_tab_menu, null);
-                    updateCustomTabLayout(customTabLayout, tabPosition, selectedPosition);
+                    updateCustomTabLayout(customTabLayout, tabPosition, tabPosition == selectedPosition);
                     tabLayout.getTabAt(tabPosition).setCustomView(customTabLayout);
                 }
             }
@@ -118,17 +117,17 @@ public class MainView extends BaseViewLayer<IMainContract.Presenter>
     /**
      * update tab selected
      *
-     * @param customTabLayout:  tabLayout
-     * @param tabPosition:      tab need to be updated layout
-     * @param selectedPosition: tab is selected
+     * @param customTabLayout:      tabLayout
+     * @param tabPosition:          tab need to be updated layout
+     * @param isCurrentTabSelected: current tab is selected
      */
-    private void updateCustomTabLayout(LinearLayout customTabLayout, int tabPosition, int selectedPosition) {
+    private void updateCustomTabLayout(LinearLayout customTabLayout, int tabPosition, boolean isCurrentTabSelected) {
         TextView titleTabTextView = customTabLayout.findViewById(R.id.tv_name);
         AppCompatImageView iconImageView = customTabLayout.findViewById(R.id.iv_icon);
         titleTabTextView.setText(mPresenter().getName(tabPosition));
 
-        titleTabTextView.setTextColor(mPresenter().getNameColor(tabPosition == selectedPosition));
-        titleTabTextView.setTypeface(titleTabTextView.getTypeface(), (tabPosition == selectedPosition) ? Typeface.BOLD : Typeface.NORMAL);
-        iconImageView.setImageResource(mPresenter().getIcon(tabPosition, tabPosition == selectedPosition));
+        titleTabTextView.setTextAppearance(mPresenter().getTextAppearance(isCurrentTabSelected));
+        titleTabTextView.setTextColor(mPresenter().getNameColor(isCurrentTabSelected));
+        iconImageView.setImageResource(mPresenter().getIcon(tabPosition, isCurrentTabSelected));
     }
 }

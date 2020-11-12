@@ -41,5 +41,7 @@ public interface IMainContract {
         int getNameColor(boolean isTabSelected);
 
         int getIcon(int position, boolean isTabSelected);
+
+        int getTextAppearance(boolean isCurrentTabSelected);
     }
 }

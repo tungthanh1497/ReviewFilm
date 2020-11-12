@@ -133,11 +133,16 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
 
     @Override
     public int getNameColor(boolean isTabSelected) {
-        return getResources().getColor(isTabSelected ? R.color.colorAccent : R.color.colorDark);
+        return getResources().getColor(isTabSelected ? R.color.colorAccent : R.color.colorDisable);
     }
 
     @Override
     public int getIcon(int position, boolean isTabSelected) {
         return isTabSelected ? navIconsActive[position] : navIcons[position];
+    }
+
+    @Override
+    public int getTextAppearance(boolean isTabSelected) {
+        return isTabSelected ? R.style.textViewBold : R.style.textViewMedium;
     }
 }
