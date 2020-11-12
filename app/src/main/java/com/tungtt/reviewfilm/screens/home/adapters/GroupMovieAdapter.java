@@ -27,14 +27,11 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
 
     private Context mContext;
     private List<GroupMovieModel> mListGroupMovie;
-    private OnGroupMovieListener mListener;
 
     public GroupMovieAdapter(Context context,
-                             List<GroupMovieModel> listGroupMovie,
-                             OnGroupMovieListener listener) {
+                             List<GroupMovieModel> listGroupMovie) {
         this.mContext = context;
         this.mListGroupMovie = listGroupMovie;
-        this.mListener = listener;
     }
 
     @NonNull
@@ -74,9 +71,5 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
-
-    public interface OnGroupMovieListener {
-
     }
 }
