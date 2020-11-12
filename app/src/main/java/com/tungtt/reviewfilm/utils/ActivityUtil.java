@@ -73,14 +73,14 @@ public class ActivityUtil {
                 } catch (Exception ex) {
                     Log.e(TAG, "showProgressDialog: ", ex);
                 }
-            } else {
-                LoadingDialog loadingDialog = new LoadingDialog(baseActivity);
-                loadingDialog.setTitle("");
-                loadingDialog.setCancelable(true);
-                loadingDialog.setOnCancelListener(null);
-                loadingDialog.setCanceledOnTouchOutside(false);
-                baseActivity.setLoadingDialog(loadingDialog);
             }
+
+            LoadingDialog loadingDialog = new LoadingDialog(baseActivity);
+            loadingDialog.setTitle("");
+            loadingDialog.setCancelable(true);
+            loadingDialog.setOnCancelListener(null);
+            loadingDialog.setCanceledOnTouchOutside(false);
+            baseActivity.setLoadingDialog(loadingDialog);
             baseActivity.getLoadingDialog().show();
         }
     }
