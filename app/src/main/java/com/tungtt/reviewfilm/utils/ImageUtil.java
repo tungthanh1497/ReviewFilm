@@ -14,7 +14,7 @@ import java.lang.annotation.RetentionPolicy;
 public class ImageUtil {
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface SIZE_IMAGE {
+    public @interface SIZE_IMAGE {
         String W94_H141 = "https://image.tmdb.org/t/p/w94_and_h141_bestv2/";
         String W300_H450 = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/";
         String W600_H900 = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/";

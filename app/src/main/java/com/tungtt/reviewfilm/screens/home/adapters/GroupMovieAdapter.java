@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tungtt.reviewfilm.R;
@@ -46,6 +48,14 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GroupMovieModel model = mListGroupMovie.get(position);
         holder.groupNameTextView.setText(model.getName());
+
+        if (model.getListMovie() != null) {
+            MovieAdapter adapter = new MovieAdapter(mContext, model.getListMovie(), new MovieAdapter.OnMovieListener() {
+            });
+            holder.movieRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+            holder.movieRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            holder.movieRecyclerView.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -57,6 +67,8 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
 
         @BindView(R.id.tv_group_name)
         TextView groupNameTextView;
+        @BindView(R.id.rv_movie)
+        RecyclerView movieRecyclerView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
