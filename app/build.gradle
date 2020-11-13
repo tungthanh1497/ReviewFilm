@@ -36,7 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //base mvp
-    implementation 'com.github.tungthanh1497:base-mvp:0.1.5'
+    implementation 'com.github.tungthanh1497:base-mvp:0.1.7'
 
     //retrofit
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
