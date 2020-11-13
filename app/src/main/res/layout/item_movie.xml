@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_movie_poster"
         android:layout_width="140dp"
         android:layout_height="210dp"
-        android:src="@color/colorTextRegular" />
+        android:scaleType="centerCrop"
+        app:riv_corner_radius_top_left="8dp"
+        app:riv_corner_radius_top_right="8dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_movie_name"
         style="@style/textViewRegular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="1"
+        android:textSize="16sp"
         tools:text="Hostiles" />
 
 </LinearLayout>

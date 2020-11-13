@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.utils.ImageUtil;
@@ -59,7 +59,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_movie_poster)
-        AppCompatImageView moviePosterImageView;
+        RoundedImageView moviePosterImageView;
         @BindView(R.id.tv_movie_name)
         TextView movieNameTextView;
 

@@ -36,7 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //base mvp
-    implementation 'com.github.tungthanh1497:base-mvp:0.1.4'
+    implementation 'com.github.tungthanh1497:base-mvp:0.1.5'
 
     //retrofit
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
@@ -58,5 +58,8 @@ dependencies {
     //butterknife
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+    //roundedimageview
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
 }
