@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.tungtt.basemvp.BaseFragment;
 import com.tungtt.reviewfilm.network.CommonCallback;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
+import com.tungtt.reviewfilm.screens.main.interfaces.OnMainListener;
 import com.tungtt.reviewfilm.utils.ActivityUtil;
 
 import java.lang.annotation.Retention;
@@ -28,8 +29,16 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
         String NOW_PLAYING = "Now Playing";
     }
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    private int mTabPosition;
+    private OnMainListener mOnMainListener;
+
+    public static HomeFragment newInstance(int tabPosition, OnMainListener listener) {
+        return new HomeFragment(tabPosition, listener);
+    }
+
+    public HomeFragment(int tabPosition, OnMainListener mOnMainListener) {
+        this.mTabPosition = tabPosition;
+        this.mOnMainListener = mOnMainListener;
     }
 
     @Override
@@ -100,5 +109,12 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
                 }, 5000);
             }
         };
+    }
+
+    @Override
+    public void back() {
+        if (mOnMainListener != null) {
+            mOnMainListener.onBackPressed(mTabPosition);
+        }
     }
 }

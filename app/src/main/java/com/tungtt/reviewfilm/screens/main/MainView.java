@@ -15,6 +15,7 @@ import com.tungtt.basemvp.mvp.view.BaseViewLayer;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.screens.home.HomeFragment;
 import com.tungtt.reviewfilm.screens.main.adapters.TabMenuAdapter;
+import com.tungtt.reviewfilm.screens.main.interfaces.OnMainListener;
 import com.tungtt.reviewfilm.screens.search.SearchFragment;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class MainView extends BaseViewLayer<IMainContract.Presenter>
 
     private TabMenuAdapter adapter;
     private List<Pair<String, Fragment>> mListFragments;
+    private OnMainListener mListener;
 
     public static MainView newInstance() {
         return new MainView();
@@ -61,10 +63,10 @@ public class MainView extends BaseViewLayer<IMainContract.Presenter>
         mListFragments = new ArrayList<>();
         mListFragments.add(new Pair<String, Fragment>(
                 "Home",
-                HomeFragment.newInstance()));
+                HomeFragment.newInstance(mListFragments.size(), getListener())));
         mListFragments.add(new Pair<String, Fragment>(
                 "Search",
-                SearchFragment.newInstance()));
+                SearchFragment.newInstance(mListFragments.size(), getListener())));
         adapter = mPresenter().initTabMenuAdapter(mListFragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -129,5 +131,18 @@ public class MainView extends BaseViewLayer<IMainContract.Presenter>
         titleTabTextView.setTextAppearance(mPresenter().getTextAppearance(isCurrentTabSelected));
         titleTabTextView.setTextColor(mPresenter().getNameColor(isCurrentTabSelected));
         iconImageView.setImageResource(mPresenter().getIcon(tabPosition, isCurrentTabSelected));
+    }
+
+    private OnMainListener getListener() {
+        if (mListener == null) {
+            mListener = currentTabPosition -> {
+                if (currentTabPosition == 0) {
+                    mPresenter().back();
+                } else {
+                    updateTab(0);
+                }
+            };
+        }
+        return mListener;
     }
 }

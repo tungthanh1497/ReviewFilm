@@ -1,6 +1,7 @@
 package com.tungtt.reviewfilm.screens.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Pair;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.tungtt.basemvp.BaseFragment;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.screens.main.adapters.TabMenuAdapter;
+import com.tungtt.reviewfilm.utils.ToastUtil;
 
 import java.util.List;
 
@@ -34,6 +36,8 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
             R.string.name_tab_home,
             R.string.name_tab_search
     };
+
+    private boolean doubleBackToExitPressedOnce;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -77,5 +81,16 @@ public class MainFragment extends BaseFragment<IMainContract.View, IMainContract
     @Override
     public int getTextAppearance(boolean isTabSelected) {
         return isTabSelected ? R.style.textViewBold : R.style.textViewMedium;
+    }
+
+    @Override
+    public void back() {
+        if (doubleBackToExitPressedOnce) {
+            getActivity().finish();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        ToastUtil.showToast(getActivity(), R.string.message_confirm_exit_app);
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 }
