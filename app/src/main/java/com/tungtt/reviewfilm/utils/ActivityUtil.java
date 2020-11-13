@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
 
+import com.tungtt.basemvp.mvp.presenter.BasePresenterLayer;
 import com.tungtt.reviewfilm.MainActivity;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.commons.BaseActivity;
@@ -35,9 +36,12 @@ public class ActivityUtil {
     public static void addScreen(Fragment fragment,
                                  String tag,
                                  Bundle data) {
-        if (data != null) {
-            fragment.setArguments(data);
+
+        if (data == null) {
+            data = new Bundle();
         }
+        data.putString(BasePresenterLayer.BUNDLE_KEY.TAG_SCREEN, tag);
+        fragment.setArguments(data);
         MainActivity.getInstance().getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.container, fragment)
