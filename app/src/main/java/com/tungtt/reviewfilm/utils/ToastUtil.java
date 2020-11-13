@@ -11,7 +11,9 @@ import androidx.annotation.StringRes;
  */
 public class ToastUtil {
     public static void showToast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        if (!CommonUtil.isNullOrEmpty(message)) {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
