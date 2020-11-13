@@ -63,7 +63,9 @@ public class HomeView extends BaseViewLayer<IHomeContract.Presenter>
 
     private void initRecyclerView() {
         mListGroupMovie = new ArrayList<>();
-        mAdapter = new GroupMovieAdapter(mActivity(), mListGroupMovie);
+        mAdapter = new GroupMovieAdapter(mActivity(), mListGroupMovie, movieModel -> {
+            mPresenter().moveToDetailMovie(movieModel);
+        });
         groupMovieRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity(), LinearLayoutManager.VERTICAL, false));
         groupMovieRecyclerView.setItemAnimator(new DefaultItemAnimator());
         groupMovieRecyclerView.setAdapter(mAdapter);

@@ -8,9 +8,12 @@ import androidx.annotation.NonNull;
 
 import com.tungtt.basemvp.BaseFragment;
 import com.tungtt.reviewfilm.network.CommonCallback;
+import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
+import com.tungtt.reviewfilm.screens.detailmovie.DetailMovieFragment;
 import com.tungtt.reviewfilm.screens.main.interfaces.OnMainListener;
 import com.tungtt.reviewfilm.utils.ActivityUtil;
+import com.tungtt.reviewfilm.utils.Constant;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -116,5 +119,12 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
         if (mOnMainListener != null) {
             mOnMainListener.onBackPressed(mTabPosition);
         }
+    }
+
+    @Override
+    public void moveToDetailMovie(MovieModel movieModel) {
+        Bundle bundle = new Bundle();
+        bundle.putString(DetailMovieFragment.BUNDLE_TAG.BUNDLE_MOVIE_ID, movieModel.getId());
+        ActivityUtil.addScreen(DetailMovieFragment.newInstance(), Constant.SCREEN_TAG.DETAIL_MOVIE, bundle);
     }
 }

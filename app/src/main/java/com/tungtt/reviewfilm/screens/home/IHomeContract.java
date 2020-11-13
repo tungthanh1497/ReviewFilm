@@ -32,5 +32,7 @@ public interface IHomeContract {
 
     interface Presenter extends IBasePresenterLayer<IHomeContract.View, IHomeContract.Model> {
         void getAllData();
+
+        void moveToDetailMovie(MovieModel movieModel);
     }
 }

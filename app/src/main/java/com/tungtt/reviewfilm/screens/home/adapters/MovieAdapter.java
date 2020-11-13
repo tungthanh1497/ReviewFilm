@@ -49,6 +49,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         MovieModel model = mListMovie.get(position);
         holder.movieNameTextView.setText(model.getTitle());
         ImageUtil.loadImage(ImageUtil.SIZE_IMAGE.W300_H450, model.getPosterPath(), holder.moviePosterImageView);
+        holder.moviePosterImageView.setOnClickListener(v -> {
+            if (mListener != null) {
+                mListener.onMovieClicked(model);
+            }
+        });
     }
 
     @Override
@@ -70,6 +75,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public interface OnMovieListener {
-
+        void onMovieClicked(MovieModel movieModel);
     }
 }

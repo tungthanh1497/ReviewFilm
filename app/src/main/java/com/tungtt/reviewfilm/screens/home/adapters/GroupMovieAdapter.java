@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tungtt.reviewfilm.R;
+import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.screens.home.models.GroupMovieModel;
 
 import java.util.List;
@@ -27,11 +28,14 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
 
     private Context mContext;
     private List<GroupMovieModel> mListGroupMovie;
+    private OnGroupMovieListener mListener;
 
     public GroupMovieAdapter(Context context,
-                             List<GroupMovieModel> listGroupMovie) {
+                             List<GroupMovieModel> listGroupMovie,
+                             OnGroupMovieListener listener) {
         this.mContext = context;
         this.mListGroupMovie = listGroupMovie;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -47,7 +51,10 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
         holder.groupNameTextView.setText(model.getName());
 
         if (model.getListMovie() != null) {
-            MovieAdapter adapter = new MovieAdapter(mContext, model.getListMovie(), new MovieAdapter.OnMovieListener() {
+            MovieAdapter adapter = new MovieAdapter(mContext, model.getListMovie(), movieModel -> {
+                if (mListener != null) {
+                    mListener.onMovieClicked(movieModel);
+                }
             });
             holder.movieRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             holder.movieRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -71,5 +78,9 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnGroupMovieListener {
+        void onMovieClicked(MovieModel movieModel);
     }
 }
