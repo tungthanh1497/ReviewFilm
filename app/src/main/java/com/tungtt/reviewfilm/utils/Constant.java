@@ -11,5 +11,6 @@ public class Constant {
     @Retention(RetentionPolicy.SOURCE)
     public @interface SCREEN_TAG {
         String MAIN = "main";
+        String DETAIL_MOVIE = "detail";
     }
 }
