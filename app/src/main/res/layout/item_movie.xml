@@ -7,13 +7,29 @@
     android:layout_margin="4dp"
     android:orientation="vertical">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/iv_movie_poster"
-        android:layout_width="140dp"
-        android:layout_height="210dp"
-        android:scaleType="centerCrop"
-        app:riv_corner_radius_top_left="8dp"
-        app:riv_corner_radius_top_right="8dp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_movie_poster"
+            android:layout_width="140dp"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius_top_left="8dp"
+            app:riv_corner_radius_top_right="8dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_vote_average"
+            style="@style/textViewRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/iv_movie_poster"
+            android:background="@drawable/bg_radius_accent"
+            android:padding="8dp"
+            android:textColor="@color/colorBackground"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_movie_name"

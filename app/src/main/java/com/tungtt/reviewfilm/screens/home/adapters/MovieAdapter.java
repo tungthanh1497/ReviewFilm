@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
+import com.tungtt.reviewfilm.utils.CommonUtil;
 import com.tungtt.reviewfilm.utils.ImageUtil;
 
 import java.util.List;
@@ -54,6 +55,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 mListener.onMovieClicked(model);
             }
         });
+        holder.voteAverageTextView.setText(model.getVoteAverage());
+        holder.voteAverageTextView.setVisibility(CommonUtil.isNullOrEmpty(model.getVoteAverage()) ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -65,6 +68,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         @BindView(R.id.iv_movie_poster)
         RoundedImageView moviePosterImageView;
+        @BindView(R.id.tv_vote_average)
+        TextView voteAverageTextView;
         @BindView(R.id.tv_movie_name)
         TextView movieNameTextView;
 
