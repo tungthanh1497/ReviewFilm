@@ -5,8 +5,11 @@ import com.tungtt.basemvp.mvp.presenter.IBasePresenterLayer;
 import com.tungtt.basemvp.mvp.view.IBaseViewLayer;
 import com.tungtt.reviewfilm.network.CommonCallback;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
+import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 
@@ -28,9 +31,11 @@ public interface IDetailMovieContract {
         void onGetVideoSuccess(String videoKey);
 
         void onGetDetailSuccess(GetDetailsResponse detailMovie);
+
+        void onGetSuggestSuccess(List<MovieModel> results);
     }
 
     interface Presenter extends IBasePresenterLayer<IDetailMovieContract.View, IDetailMovieContract.Model> {
-        String getMovieKey();
+        void reload(String movieId);
     }
 }

@@ -4,13 +4,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.tungtt.basemvp.mvp.view.BaseViewLayer;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
+import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
+import com.tungtt.reviewfilm.screens.home.adapters.MovieAdapter;
 import com.tungtt.reviewfilm.utils.CommonUtil;
 import com.tungtt.reviewfilm.utils.ImageUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tungtt a.k.a TungTT
@@ -25,9 +34,12 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
     private TextView titleTextView;
     private TextView releaseDateTextView;
     private TextView overviewTextView;
+    private RecyclerView suggestRecyclerView;
 
     private YouTubePlayer mYoutubePlayer;
     private String mVideoKey;
+    private List<MovieModel> mListMovie;
+    private MovieAdapter mAdapter;
 
     public static DetailMovieView newInstance() {
         return new DetailMovieView();
@@ -46,11 +58,13 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
         titleTextView = view.findViewById(R.id.tv_movie_title);
         releaseDateTextView = view.findViewById(R.id.tv_release_date);
         overviewTextView = view.findViewById(R.id.tv_overview);
+        suggestRecyclerView = view.findViewById(R.id.rv_suggest);
     }
 
     @Override
     public void init() {
         initYoutubePlayer();
+        initRecyclerView();
     }
 
     @Override
@@ -71,6 +85,12 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
 
     }
 
+    @Override
+    public void onGetSuggestSuccess(List<MovieModel> results) {
+        mListMovie.addAll(results);
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void initYoutubePlayer() {
         youtubePlayerView.getYouTubePlayerWhenReady(youTubePlayer -> {
             mYoutubePlayer = youTubePlayer;
@@ -78,5 +98,18 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
                 youTubePlayer.cueVideo(mVideoKey, 0);
             }
         });
+    }
+
+    private void initRecyclerView() {
+        mListMovie = new ArrayList<>();
+        mAdapter = new MovieAdapter(mActivity(), mListMovie, movieModel -> {
+            mListMovie.clear();
+            mPresenter().reload(movieModel.getId());
+        });
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity(), 2);
+        gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        suggestRecyclerView.setLayoutManager(gridLayoutManager);
+        suggestRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        suggestRecyclerView.setAdapter(mAdapter);
     }
 }

@@ -28,7 +28,7 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
         String BUNDLE_MOVIE_ID = "bundle_movie_id";
     }
 
-    private String movieId;
+    private String mMovieId;
 
     public static DetailMovieFragment newInstance() {
         return new DetailMovieFragment();
@@ -42,22 +42,27 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
 
     @Override
     public void onReceiveData(@NonNull Bundle data) {
-        movieId = data.getString(BUNDLE_TAG.BUNDLE_MOVIE_ID, "");
+        mMovieId = data.getString(BUNDLE_TAG.BUNDLE_MOVIE_ID, "");
     }
 
     @Override
     public void init(View view) {
-        mModel().getAllDetailMovie(movieId,
+        getAllDetailMovie();
+    }
+
+    @Override
+    public void reload(String movieId) {
+        this.mMovieId = movieId;
+        getAllDetailMovie();
+    }
+
+    private void getAllDetailMovie() {
+        mModel().getAllDetailMovie(mMovieId,
                 getAllDetailMovieCallback(),
                 getDetailsCallback(),
                 getVideoCallback(),
                 getSimilarCallback(),
                 getRecommendationsCallback());
-    }
-
-    @Override
-    public String getMovieKey() {
-        return "cW9EdTbkWfc";
     }
 
     private Observer<Object> getAllDetailMovieCallback() {
@@ -81,7 +86,7 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
             public void onComplete() {
                 new Handler().postDelayed(() -> {
                     ActivityUtil.dismissProgressDialog(getActivity());
-                }, 3000);
+                }, 1000);
             }
         };
     }
@@ -124,6 +129,9 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
             @Override
             public void onCommonSuccess(GetListMoviesResponse response) {
                 super.onCommonSuccess(response);
+                if (!CommonUtil.isNullOrEmpty(response.getResults())) {
+                    mView().onGetSuggestSuccess(response.getResults());
+                }
             }
 
             @Override
@@ -138,6 +146,9 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
             @Override
             public void onCommonSuccess(GetListMoviesResponse response) {
                 super.onCommonSuccess(response);
+                if (!CommonUtil.isNullOrEmpty(response.getResults())) {
+                    mView().onGetSuggestSuccess(response.getResults());
+                }
             }
 
             @Override

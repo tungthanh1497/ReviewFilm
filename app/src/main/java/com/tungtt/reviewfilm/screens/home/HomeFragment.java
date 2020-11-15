@@ -106,7 +106,7 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
                 new Handler().postDelayed(() -> {
                     ActivityUtil.dismissProgressDialog(getActivity());
                     mView().onLoadAllDataSuccess();
-                }, 3000);
+                }, 1000);
             }
         };
     }
