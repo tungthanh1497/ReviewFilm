@@ -2,6 +2,7 @@ package com.tungtt.reviewfilm.screens.detailmovie;
 
 import android.view.View;
 
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.tungtt.basemvp.mvp.view.BaseViewLayer;
 import com.tungtt.reviewfilm.R;
@@ -16,7 +17,7 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
 
     private YouTubePlayerView youtubePlayerView;
 
-    private boolean mIsYouTubePlayerReady = false;
+    private YouTubePlayer mYoutubePlayer;
     private String mVideoKey;
 
     public static DetailMovieView newInstance() {
@@ -38,9 +39,17 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
         initYoutubePlayer();
     }
 
+    @Override
+    public void onGetVideoSuccess(String videoKey) {
+        mVideoKey = videoKey;
+        if (!CommonUtil.isNullOrEmpty(mYoutubePlayer)) {
+            mYoutubePlayer.cueVideo(mVideoKey, 0);
+        }
+    }
+
     private void initYoutubePlayer() {
         youtubePlayerView.getYouTubePlayerWhenReady(youTubePlayer -> {
-            mIsYouTubePlayerReady = true;
+            mYoutubePlayer = youTubePlayer;
             if (!CommonUtil.isNullOrEmpty(mVideoKey)) {
                 youTubePlayer.cueVideo(mVideoKey, 0);
             }

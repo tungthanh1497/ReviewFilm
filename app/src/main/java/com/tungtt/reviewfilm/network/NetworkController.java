@@ -129,4 +129,22 @@ public class NetworkController {
                 .doOnNext(callback::onResponse)
                 .doOnError(callback::onError);
     }
+
+    public static void getAllDetailMovie(String movieId,
+                                         Observer<Object> observer,
+                                         CommonCallback<GetDetailsResponse> getDetailsCallback,
+                                         CommonCallback<GetVideosResponse> getVideoCallback,
+                                         CommonCallback<GetListMoviesResponse> getSimilarCallback,
+                                         CommonCallback<GetListMoviesResponse> getRecommendationsCallback) {
+        List<Observable<?>> observableList = new ArrayList<>();
+
+        observableList.add(getDetails(movieId, getDetailsCallback));
+        observableList.add(getVideos(movieId, getVideoCallback));
+        observableList.add(getSimilarMovies(movieId, getSimilarCallback));
+        observableList.add(getRecommendationsMovies(movieId, getRecommendationsCallback));
+
+        Observable.mergeDelayError(observableList)
+                .observeOn(AndroidSchedulers.mainThread(), true)
+                .subscribe(observer);
+    }
 }
