@@ -56,7 +56,8 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
         getAllDetailMovie();
     }
 
-    private void getAllDetailMovie() {
+    @Override
+    public void getAllDetailMovie() {
         mModel().getAllDetailMovie(mMovieId,
                 getAllDetailMovieCallback(),
                 getDetailsCallback(),

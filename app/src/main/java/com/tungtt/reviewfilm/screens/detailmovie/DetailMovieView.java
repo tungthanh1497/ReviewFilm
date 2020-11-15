@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -35,6 +36,7 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
     private TextView releaseDateTextView;
     private TextView overviewTextView;
     private RecyclerView suggestRecyclerView;
+    private SwipeRefreshLayout pullToRefreshLayout;
 
     private YouTubePlayer mYoutubePlayer;
     private String mVideoKey;
@@ -59,10 +61,12 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
         releaseDateTextView = view.findViewById(R.id.tv_release_date);
         overviewTextView = view.findViewById(R.id.tv_overview);
         suggestRecyclerView = view.findViewById(R.id.rv_suggest);
+        pullToRefreshLayout = view.findViewById(R.id.srl_pull_to_refresh);
     }
 
     @Override
     public void init() {
+        implementListeners();
         initYoutubePlayer();
         initRecyclerView();
     }
@@ -111,5 +115,13 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
         suggestRecyclerView.setLayoutManager(gridLayoutManager);
         suggestRecyclerView.setItemAnimator(new DefaultItemAnimator());
         suggestRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void implementListeners() {
+        pullToRefreshLayout.setOnRefreshListener(() -> {
+            pullToRefreshLayout.setRefreshing(false);
+            mListMovie.clear();
+            mPresenter().getAllDetailMovie();
+        });
     }
 }

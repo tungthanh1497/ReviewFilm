@@ -37,5 +37,7 @@ public interface IDetailMovieContract {
 
     interface Presenter extends IBasePresenterLayer<IDetailMovieContract.View, IDetailMovieContract.Model> {
         void reload(String movieId);
+
+        void getAllDetailMovie();
     }
 }
