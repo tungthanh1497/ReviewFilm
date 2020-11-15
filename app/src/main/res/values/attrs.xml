@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatioImageView">
+        <attr name="ratio_width" format="float" />
+        <attr name="ratio_height" format="float" />
+        <attr name="fixed_dimensional">
+            <enum name="width" value="0" />
+            <enum name="height" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

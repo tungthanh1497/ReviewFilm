@@ -18,6 +18,7 @@ import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.screens.home.adapters.MovieAdapter;
 import com.tungtt.reviewfilm.utils.CommonUtil;
 import com.tungtt.reviewfilm.utils.ImageUtil;
+import com.tungtt.reviewfilm.widgets.RatioImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,12 +107,11 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
 
     private void initRecyclerView() {
         mListMovie = new ArrayList<>();
-        mAdapter = new MovieAdapter(mActivity(), mListMovie, movieModel -> {
+        mAdapter = new MovieAdapter(mActivity(), mListMovie, RatioImageView.TYPE_FIXED_DIMENSIONAL.WIDTH, movieModel -> {
             mListMovie.clear();
             mPresenter().reload(movieModel.getId());
         });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity(), 2);
-        gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity(), 4);
         suggestRecyclerView.setLayoutManager(gridLayoutManager);
         suggestRecyclerView.setItemAnimator(new DefaultItemAnimator());
         suggestRecyclerView.setAdapter(mAdapter);

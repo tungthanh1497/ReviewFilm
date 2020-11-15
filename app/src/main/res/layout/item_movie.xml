@@ -11,11 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.tungtt.reviewfilm.widgets.RatioImageView
             android:id="@+id/iv_movie_poster"
             android:layout_width="140dp"
             android:layout_height="210dp"
             android:scaleType="centerCrop"
+            app:fixed_dimensional="width"
+            app:ratio_height="210"
+            app:ratio_width="140"
             app:riv_corner_radius_top_left="8dp"
             app:riv_corner_radius_top_right="8dp" />
 

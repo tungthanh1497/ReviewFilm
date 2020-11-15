@@ -61,6 +61,8 @@
                             style="@style/textViewMedium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             tools:text="Roald Dahl's The Witches" />
 
                         <TextView
@@ -77,6 +79,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:ellipsize="end"
+                            android:maxLines="6"
                             tools:text="In late 1967, a young orphaned boy goes to live with his loving grandma in the rural Alabama town of Demopolis. As the boy and his grandmother encounter some deceptively glamorous but thoroughly diabolical witches, she wisely whisks him away to a seaside resort. Regrettably, they arrive at precisely the same time that the world's Grand High Witch has gathered." />
 
                     </LinearLayout>

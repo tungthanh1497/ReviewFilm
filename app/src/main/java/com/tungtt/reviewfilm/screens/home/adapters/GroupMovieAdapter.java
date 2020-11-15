@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tungtt.reviewfilm.R;
 import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.screens.home.models.GroupMovieModel;
+import com.tungtt.reviewfilm.widgets.RatioImageView;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class GroupMovieAdapter extends RecyclerView.Adapter<GroupMovieAdapter.Vi
         holder.groupNameTextView.setText(model.getName());
 
         if (model.getListMovie() != null) {
-            MovieAdapter adapter = new MovieAdapter(mContext, model.getListMovie(), movieModel -> {
+            MovieAdapter adapter = new MovieAdapter(mContext, model.getListMovie(), RatioImageView.TYPE_FIXED_DIMENSIONAL.HEIGHT, movieModel -> {
                 if (mListener != null) {
                     mListener.onMovieClicked(movieModel);
                 }
