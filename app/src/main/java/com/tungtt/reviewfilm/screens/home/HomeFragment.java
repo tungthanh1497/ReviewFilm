@@ -103,13 +103,10 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
 
             @Override
             public void onComplete() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        ActivityUtil.dismissProgressDialog(getActivity());
-                        mView().onLoadAllDataSuccess();
-                    }
-                }, 5000);
+                new Handler().postDelayed(() -> {
+                    ActivityUtil.dismissProgressDialog(getActivity());
+                    mView().onLoadAllDataSuccess();
+                }, 3000);
             }
         };
     }
