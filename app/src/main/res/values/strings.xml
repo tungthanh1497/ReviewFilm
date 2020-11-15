@@ -5,4 +5,5 @@
     <string name="name_tab_home">Home</string>
     <string name="name_tab_search">Search</string>
     <string name="message_confirm_exit_app">Please click BACK again to exit</string>
+    <string name="the_feature_is_under_development">The feature is under development.</string>
 </resources>

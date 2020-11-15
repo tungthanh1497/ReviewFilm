@@ -18,7 +18,7 @@ public class SearchView extends BaseViewLayer<ISearchContract.Presenter>
 
     @Override
     public int getLayoutRes() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_search;
     }
 
     @Override
