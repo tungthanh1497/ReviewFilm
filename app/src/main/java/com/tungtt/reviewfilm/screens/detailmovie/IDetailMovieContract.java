@@ -16,5 +16,6 @@ public interface IDetailMovieContract {
     }
 
     interface Presenter extends IBasePresenterLayer<IDetailMovieContract.View, IDetailMovieContract.Model> {
+        String getMovieKey();
     }
 }

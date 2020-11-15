@@ -40,4 +40,9 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
     public void init(View view) {
         ToastUtil.showToast(getContext(), movieId);
     }
+
+    @Override
+    public String getMovieKey() {
+        return "cW9EdTbkWfc";
+    }
 }
