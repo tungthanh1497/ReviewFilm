@@ -91,6 +91,7 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
             @Override
             public void onCommonSuccess(GetDetailsResponse response) {
                 super.onCommonSuccess(response);
+                mView().onGetDetailSuccess(response);
             }
 
             @Override

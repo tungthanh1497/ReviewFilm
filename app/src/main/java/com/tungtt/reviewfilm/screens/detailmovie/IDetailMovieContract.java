@@ -26,6 +26,8 @@ public interface IDetailMovieContract {
 
     interface View extends IBaseViewLayer<IDetailMovieContract.Presenter> {
         void onGetVideoSuccess(String videoKey);
+
+        void onGetDetailSuccess(GetDetailsResponse detailMovie);
     }
 
     interface Presenter extends IBasePresenterLayer<IDetailMovieContract.View, IDetailMovieContract.Model> {
