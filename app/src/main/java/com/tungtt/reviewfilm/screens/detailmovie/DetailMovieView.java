@@ -17,6 +17,7 @@ import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsRespon
 import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.screens.home.adapters.MovieAdapter;
 import com.tungtt.reviewfilm.utils.CommonUtil;
+import com.tungtt.reviewfilm.utils.DateUtil;
 import com.tungtt.reviewfilm.utils.ImageUtil;
 import com.tungtt.reviewfilm.widgets.RatioImageView;
 
@@ -34,6 +35,7 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
     private ImageView backdropImageView;
     private ImageView posterImageView;
     private TextView titleTextView;
+    private TextView genresTextView;
     private TextView releaseDateTextView;
     private TextView overviewTextView;
     private RecyclerView suggestRecyclerView;
@@ -59,6 +61,7 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
         backdropImageView = view.findViewById(R.id.iv_movie_backdrop);
         posterImageView = view.findViewById(R.id.iv_movie_poster);
         titleTextView = view.findViewById(R.id.tv_movie_title);
+        genresTextView = view.findViewById(R.id.tv_genres);
         releaseDateTextView = view.findViewById(R.id.tv_release_date);
         overviewTextView = view.findViewById(R.id.tv_overview);
         suggestRecyclerView = view.findViewById(R.id.rv_suggest);
@@ -85,7 +88,11 @@ public class DetailMovieView extends BaseViewLayer<IDetailMovieContract.Presente
         ImageUtil.loadImage(ImageUtil.SIZE_IMAGE.W600_H900, detailMovie.getBackdropPath(), backdropImageView);
         ImageUtil.loadImage(ImageUtil.SIZE_IMAGE.W300_H450, detailMovie.getPosterPath(), posterImageView);
         titleTextView.setText(detailMovie.getOriginalTitle());
-        releaseDateTextView.setText(detailMovie.getReleaseDate());
+        genresTextView.setText(mPresenter().getGenresText(detailMovie.getGenres()));
+        genresTextView.setVisibility(CommonUtil.isNullOrEmpty(detailMovie.getGenres()) ? View.GONE : View.VISIBLE);
+        releaseDateTextView.setText(String.format("Status: %s in %s",
+                detailMovie.getStatus(),
+                DateUtil.stringToString(detailMovie.getReleaseDate(), DateUtil.DATE_FORMAT.YMD, DateUtil.DATE_FORMAT.DMY)));
         overviewTextView.setText(detailMovie.getOverview());
 
     }

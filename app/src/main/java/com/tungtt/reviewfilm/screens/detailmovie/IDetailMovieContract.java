@@ -4,6 +4,7 @@ import com.tungtt.basemvp.mvp.model.IBaseModelLayer;
 import com.tungtt.basemvp.mvp.presenter.IBasePresenterLayer;
 import com.tungtt.basemvp.mvp.view.IBaseViewLayer;
 import com.tungtt.reviewfilm.network.CommonCallback;
+import com.tungtt.reviewfilm.network.models.getdetails.GenreModel;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
 import com.tungtt.reviewfilm.network.models.getlistmovies.MovieModel;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
@@ -39,5 +40,7 @@ public interface IDetailMovieContract {
         void reload(String movieId);
 
         void getAllDetailMovie();
+
+        String getGenresText(List<GenreModel> genres);
     }
 }

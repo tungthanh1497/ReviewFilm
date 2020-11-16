@@ -37,9 +37,9 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_margin="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -62,8 +62,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:maxLines="2"
+                            android:maxLines="1"
                             tools:text="Roald Dahl's The Witches" />
+
+                        <TextView
+                            android:id="@+id/tv_genres"
+                            style="@style/textViewRegular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            tools:text="Genres" />
 
                         <TextView
                             android:id="@+id/tv_release_date"

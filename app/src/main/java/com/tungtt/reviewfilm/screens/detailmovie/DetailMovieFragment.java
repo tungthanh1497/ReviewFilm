@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.tungtt.basemvp.BaseFragment;
 import com.tungtt.reviewfilm.network.CommonCallback;
+import com.tungtt.reviewfilm.network.models.getdetails.GenreModel;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
@@ -15,6 +16,7 @@ import com.tungtt.reviewfilm.utils.CommonUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -63,6 +65,15 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
                 getVideoCallback(),
                 getSimilarCallback(),
                 getRecommendationsCallback());
+    }
+
+    @Override
+    public String getGenresText(List<GenreModel> listGenres) {
+        StringBuilder genres = new StringBuilder("Genres: ");
+        for (GenreModel item : listGenres) {
+            genres.append(item.getName()).append(", ");
+        }
+        return genres.toString().trim().substring(0, genres.length() - 2);
     }
 
     private Observer<Object> getAllDetailMovieCallback() {
