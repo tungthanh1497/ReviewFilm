@@ -60,7 +60,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             }
         });
         holder.voteAverageTextView.setText(model.getVoteAverage());
-        holder.voteAverageTextView.setVisibility(CommonUtil.isNullOrEmpty(model.getVoteAverage()) ? View.GONE : View.VISIBLE);
+        holder.voteAverageTextView.setVisibility((CommonUtil.isNullOrEmpty(model.getVoteAverage()) || "0".equals(model.getVoteAverage()))
+                ? View.GONE : View.VISIBLE);
     }
 
     @Override
