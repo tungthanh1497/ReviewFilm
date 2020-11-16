@@ -40,5 +40,5 @@ public interface IApiService {
     Observable<Response<GetListMoviesResponse>> getRecommendationsMovies(@Path("movie_id") String movieId);
 
     @GET("search/movie")
-    Observable<Response<GetListMoviesResponse>> searchKeywords(@Query("query") String query);
+    Observable<Response<GetListMoviesResponse>> searchMovies(@Query("query") String query);
 }

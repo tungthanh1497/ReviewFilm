@@ -100,9 +100,16 @@ public class NetworkController {
         return initObservable(getAPIBuilder().getRecommendationsMovies(movieId), callback);
     }
 
-    public static Observable<Response<GetListMoviesResponse>> searchKeywords(String query,
-                                                                             CommonCallback<GetListMoviesResponse> callback) {
-        return initObservable(getAPIBuilder().searchKeywords(query), callback);
+    private static Observable<Response<GetListMoviesResponse>> searchMovie(String query,
+                                                                           CommonCallback<GetListMoviesResponse> callback) {
+        return initObservable(getAPIBuilder().searchMovies(query), callback);
+    }
+
+    public static void searchMovies(String query,
+                                    CommonCallback<GetListMoviesResponse> callback) {
+        searchMovie(query, callback).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
     public static void getAllTabData(Observer<Object> observer,
