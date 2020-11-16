@@ -103,7 +103,6 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
             @Override
             public void onComplete() {
                 ActivityUtil.dismissProgressDialog(getActivity());
-                mView().onLoadAllDataSuccess();
             }
         };
     }

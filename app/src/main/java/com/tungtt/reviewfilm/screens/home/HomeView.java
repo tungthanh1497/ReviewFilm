@@ -54,10 +54,6 @@ public class HomeView extends BaseViewLayer<IHomeContract.Presenter>
     @Override
     public void onGetGroupMovieSuccess(String groupMovieName, List<MovieModel> listMovie) {
         mListGroupMovie.add(new GroupMovieModel(groupMovieName, listMovie));
-    }
-
-    @Override
-    public void onLoadAllDataSuccess() {
         mAdapter.notifyDataSetChanged();
     }
 

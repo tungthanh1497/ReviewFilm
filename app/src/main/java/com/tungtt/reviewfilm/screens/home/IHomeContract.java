@@ -26,8 +26,6 @@ public interface IHomeContract {
 
     interface View extends IBaseViewLayer<IHomeContract.Presenter> {
         void onGetGroupMovieSuccess(String groupMovieName, List<MovieModel> listMovie);
-
-        void onLoadAllDataSuccess();
     }
 
     interface Presenter extends IBasePresenterLayer<IHomeContract.View, IHomeContract.Model> {
