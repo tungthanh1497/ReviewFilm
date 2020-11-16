@@ -12,6 +12,7 @@ import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMovies
 import com.tungtt.reviewfilm.screens.detailmovie.DetailMovieFragment;
 import com.tungtt.reviewfilm.screens.main.interfaces.OnMainListener;
 import com.tungtt.reviewfilm.utils.ActivityUtil;
+import com.tungtt.reviewfilm.utils.CommonUtil;
 import com.tungtt.reviewfilm.utils.Constant;
 
 import java.lang.annotation.Retention;
@@ -73,7 +74,9 @@ public class HomeFragment extends BaseFragment<IHomeContract.View, IHomeContract
             @Override
             public void onCommonSuccess(GetListMoviesResponse response) {
                 super.onCommonSuccess(response);
-                mView().onGetGroupMovieSuccess(groupMovieName, response.getResults());
+                if (!CommonUtil.isNullOrEmpty(response.getResults())) {
+                    mView().onGetGroupMovieSuccess(groupMovieName, response.getResults());
+                }
             }
 
             @Override
