@@ -1,7 +1,6 @@
 package com.tungtt.reviewfilm.screens.detailmovie;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -85,9 +84,7 @@ public class DetailMovieFragment extends BaseFragment<IDetailMovieContract.View,
 
             @Override
             public void onComplete() {
-                new Handler().postDelayed(() -> {
-                    ActivityUtil.dismissProgressDialog(getActivity());
-                }, 1000);
+                ActivityUtil.dismissProgressDialog(getActivity());
             }
         };
     }
