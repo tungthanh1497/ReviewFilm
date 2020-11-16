@@ -5,7 +5,6 @@ import com.tungtt.reviewfilm.network.models.SimpleResponse;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
-import com.tungtt.reviewfilm.network.models.searchkeywords.response.SearchKeyWordsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,8 +100,8 @@ public class NetworkController {
         return initObservable(getAPIBuilder().getRecommendationsMovies(movieId), callback);
     }
 
-    public static Observable<Response<SearchKeyWordsResponse>> searchKeywords(String query,
-                                                                              CommonCallback<SearchKeyWordsResponse> callback) {
+    public static Observable<Response<GetListMoviesResponse>> searchKeywords(String query,
+                                                                             CommonCallback<GetListMoviesResponse> callback) {
         return initObservable(getAPIBuilder().searchKeywords(query), callback);
     }
 

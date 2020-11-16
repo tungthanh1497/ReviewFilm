@@ -3,7 +3,6 @@ package com.tungtt.reviewfilm.network;
 import com.tungtt.reviewfilm.network.models.getdetails.response.GetDetailsResponse;
 import com.tungtt.reviewfilm.network.models.getlistmovies.response.GetListMoviesResponse;
 import com.tungtt.reviewfilm.network.models.getvideos.response.GetVideosResponse;
-import com.tungtt.reviewfilm.network.models.searchkeywords.response.SearchKeyWordsResponse;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
@@ -40,6 +39,6 @@ public interface IApiService {
     @GET("movie/{movie_id}/recommendations")
     Observable<Response<GetListMoviesResponse>> getRecommendationsMovies(@Path("movie_id") String movieId);
 
-    @GET("search/keyword")
-    Observable<Response<SearchKeyWordsResponse>> searchKeywords(@Query("query") String query);
+    @GET("search/movie")
+    Observable<Response<GetListMoviesResponse>> searchKeywords(@Query("query") String query);
 }
