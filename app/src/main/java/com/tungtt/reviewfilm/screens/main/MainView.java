@@ -17,6 +17,7 @@ import com.tungtt.reviewfilm.screens.home.HomeFragment;
 import com.tungtt.reviewfilm.screens.main.adapters.TabMenuAdapter;
 import com.tungtt.reviewfilm.screens.main.interfaces.OnMainListener;
 import com.tungtt.reviewfilm.screens.search.SearchFragment;
+import com.tungtt.reviewfilm.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,7 @@ public class MainView extends BaseViewLayer<IMainContract.Presenter>
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 updateTab(tab.getPosition());
+                CommonUtil.hideKeyboard(mActivity());
             }
 
             @Override
