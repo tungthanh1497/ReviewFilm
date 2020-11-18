@@ -63,7 +63,7 @@ public class NetworkFactory {
 
     private static <T extends SimpleResponse> Observable<Response<T>> initObservable(Observable<Response<T>> observable, CommonCallback<T> callback) {
         return observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .doOnNext(callback::onResponse)
                 .doOnError(callback::onError);
     }
